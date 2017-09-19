@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Aspect Mining Visualization Tool</title>
+
+    <!-- Angular -->
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/script.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+        function mineForAspects() {
+            var sectionInputParameters = document.getElementById('sectionInputParameters')
+            sectionInputParameters.style.display = 'none';
+
+            var sectionAspectMiningResults = document.getElementById('sectionAspectMiningResults');
+            sectionAspectMiningResults.style.display = 'inline';
+        }
+        function showMineParameters() {
+            var sectionInputParameters = document.getElementById('sectionInputParameters')
+            sectionInputParameters.style.display = 'inline';
+
+            var sectionAspectMiningResults = document.getElementById('sectionAspectMiningResults');
+            sectionAspectMiningResults.style.display = 'none';
+        }
+    </script>
+    <title>Aspect Mining Visualization Tool</title>
+</head>
+<body ng-app="amvModule">
+<form>
+    <div class="services container" ng-controller="amvController">
+        <div class="panel-header">
+            <h2>Aspect Mining and Visualization Tool {{message}}</h2>
+        </div>
+
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="inactive"><a data-toggle="tab"><strong>Aspect Mining Input Parameters</strong></a></li>
+                <li><a data-toggle="tab"><strong>Aspect Mining Results</strong></a></li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            &nbsp;
+        </div>
+
+        <div class="tab-content">
+            <div id="sectionInputParameters" style="display:inline" class="tab-pane fade in active">
+                <label>Benchmark software to use when mining for aspects:</label>
+                <p>The JHot Draw version 4.12b source code will be mined for aspects. This source code is seeded with code clones to allow for mining of all categories of cross cutting concerns that are under consideration for this study.</p>
+
+                <!-- Start test -->
+                <div class="form-group">
+                    <div class="row ">
+                        product.name : {{product.name}}
+                    </div>
+                    <div class="row ">
+                        product.qty : {{product.qty}}
+                    </div>
+                </div>
+                <!-- End test -->
+
+                <div class="form-group">
+                    <div class="row ">
+                        <div class="col-xs-12">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="optionsRadios" id="tomcat" value="option1" checked/>
+                                    Tomcat Version 3.2
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="optionsRadios" id="jHotDraw" value="option2" />
+                                    JHot Draw 4.12b
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label>Clustering algorithm that will be used:</label>
+                <div class="form-group">
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="optionsRadiosClustering" id="model" data-ng-model="aspectMine.clusteringAlgorithm" value="modelBasedAlgorithm" />
+                                    Model Based Algorithm
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio"  name="optionsRadiosClustering" id="agglomorative"  data-ng-model="aspectMine.clusteringAlgorithm" value="modelBasedAgglomerativeHierarchical" />
+                                    Model Based Agglomerative Hierarchical
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label>Vector Space Model to use:</label>
+                <div class="form-group ">
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="vectorSpaceModelGroup1" id="fanIn_numCallers" data-ng-model="aspectMine.vectorSpaceModel" value="fanInNumCallers" checked />
+                                    fanIn_numCallers
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="vectorSpaceModelGroup1" id="fanIn_hasMethod" data-ng-model="aspectMine.vectorSpaceModel" value="fanIn_hasMethod" />
+                                    fanIn_hasMethod
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="vectorSpaceModelGroup1" id="sigTokens" data-ng-model="aspectMine.vectorSpaceModel" value="sigTokens" />
+                                    sigTokens
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="vectorSpaceModelGroup1" id="fanIn_sigTokens" data-ng-model="aspectMine.vectorSpaceModel" value="fanIn_sigTokens"/>
+                                    fanIn_sigTokens
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="vectorSpaceModelGroup1" id="fanIn_numCallers_sigTokens" data-ng-model="aspectMine.vectorSpaceModel" value="fanIn_numCallers_sigTokens"/>
+                                    fanIn_numCallers_sigTokens
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="radio">
+                                <label>
+                                    <input type = "radio" name="vectorSpaceModelGroup1" id="fanIn_numCallers_hasMethod_sigTokens" data-ng-model="aspectMine.vectorSpaceModel" value="fanIn_numCallers_hasMethod_sigTokens" />
+                                    fanIn_numCallers_hasMethod_sigTokens
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label>Clone Detection Algorithm that will be used:</label>
+                <p>A combination of a Program Dependency Graphs (PDG) and Abstract Syntax Tree (AST) will be used to identify cross cutting candidates based on code clones.</p>
+
+                <label>Execution Trace Algorithm that will be used:</label>
+                <p>Aspect mining using Event traces will be used. This dynamic aspect mining technique will be used to identify recurring execution patterns for detection of cross cutting concerns.</p>
+
+                <label>Cross cutting concerns that will be mined for:</label>
+                <div class="form-group">
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="OrderedMethodCall" id="orderedMethodCallId" value="false"
+                                           ng-model="aspectMine.orderedMethodCall" ng-true-value="true" ng-false-value="false" />
+                                    Ordered Method Call
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="CodeClone" id="codeCloneId" value="false"
+                                    ng-model="aspectMine.codeClone" ng-true-value="true" ng-false-value="false" />
+                                    Code Clone
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="UniqueClassFanIn" id="uniqueClassFanInId" value="false"
+                                    ng-model="aspectMine.uniqueClassFanIn" ng-true-value="true" ng-false-value="false" />
+                                    Unique Class Fan In
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="CallsInClones" id="callsInClonesId" value="false"
+                                    ng-model="aspectMine.callsInClones" ng-true-value="true" ng-false-value="false" />
+                                    Calls In Clones
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="CallsAtBeginningAndEndOfMethod" id="callsAtBeginningAndEndOfMethodId" value="false"
+                                    ng-model="aspectMine.callsAtBeginningAndEndOfMethod" ng-true-value="true" ng-false-value="false" />
+                                    <nobr>Calls At Beginning And End Of Method</nobr>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="EventAsParameter" id="eventAsParameterId" value="false"
+                                    ng-model="aspectMine.eventAsParameter" ng-true-value="true" ng-false-value="false" />
+                                    <nobr>Event As Parameter</nobr>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="Singleton" id="singletonId" value="false"
+                                    ng-model="aspectMine.singleton" ng-true-value="true" ng-false-value="false" />
+                                    Singleton
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="Observer" id="observerId" value="false"
+                                    ng-model="aspectMine.observer" ng-true-value="true" ng-false-value="false" />
+                                    Observer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="ChainOfResponsibility" id="chainOfResponsibilityId" value="false"
+                                    ng-model="aspectMine.chainOfResponsibility" ng-true-value="true" ng-false-value="false" />
+                                    <nobr>Chain Of Responsibility</nobr>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="CrossCuttingConcernAsInterface" id="crossCuttingConcernAsInterfaceId" value="false"
+                                    ng-model="aspectMine.crossCuttingConcernAsInterface" ng-true-value="true" ng-false-value="false" />
+                                    <nobr>Cross Cutting Concern As Interface</nobr>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sectionAspectMiningResults" class="tab-pane fade in active" style="display:none">
+                <h1>TB</h1>
+            </div>
+            <div class="form-group">
+                <!--<button class="btn btn-default" id="mineForAspectsBtnId" type="button" onClick="mineForAspects();">Mine For Aspects</button>&nbsp;-->
+                <button class="btn btn-default" id="mineForAspectsBtnId" type="button" ng-click="mineForAspects()">Mine For Aspects</button>&nbsp;
+                <button class="btn btn-default" id="mineParametersBtnId" type="button" onClick="showMineParameters();">Aspect mining input parameters</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
