@@ -32,11 +32,16 @@ var myApp = angular
         };
 
         function getUrl() {
-            var url = 'http://localhost:9191/amv/mine?clusteringAlgorithm=' + getClusteringAlgorithm();
-            url += '&vectorSpaceModel=' + getVectorSpaceModel();
-            url += '&crosscuttingConcerns=' + getCrossCuttingConcerns();
+            var url = 'http://localhost:8080/amvRestServices/service/loan/-1?repayAmount=500.00&repayDate=2017-04-12';
             return url;
         }
+
+        // function getUrl() {
+        //     var url = 'http://localhost:9191/amv/mine?clusteringAlgorithm=' + getClusteringAlgorithm();
+        //     url += '&vectorSpaceModel=' + getVectorSpaceModel();
+        //     url += '&crosscuttingConcerns=' + getCrossCuttingConcerns();
+        //     return url;
+        // }
 
         function getClusteringAlgorithm() {
             return aspectMine.clusteringAlgorithm;
