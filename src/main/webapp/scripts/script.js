@@ -21,20 +21,75 @@ var myApp = angular
         $scope.aspectMine = aspectMine;
 
         $scope.mineForAspects = function() {
-            var url = getUrl();
+            var url = putUrl();
             console.debug("url: " + url);
 
-            $http.get(url)
-                .then(function(response) {
-                    $scope.product = response.data;
-                });
+            var data = {
+                "clusteringAlgorithm": "clusteringAlgorithm",
+                "vectorSpaceModel": "vectorSpaceModel",
+                "orderedMethodCall": "yes",
+                "codeClone":  "yes",
+                "uniqueClassFanIn":  "yes",
+                "callsInClones":  "yes",
+                "callsAtBeginningAndEndOfMethod": "no",
+                "eventAsParameter": "no",
+                "singleton": "no",
+                "observer": "no",
+                "chainOfResponsibility": "no",
+                "crossCuttingConcernAsInterface": "no"
+            };
+
+            $http.put(url, data)
+                .then(
+                    function(response){
+                        $scope.product = response.data;
+                    },
+                    function(response){
+                        $scope.product = response.data;
+                    }
+                );
+
+            // $http.put(url)
+            //     .then(function(response) {
+            //         $scope.product = response.data;
+            //     });
+
+            // $http.get(url)
+            //     .then(function(response) {
+            //         $scope.product = response.data;
+            //     });
 
         };
+
+        // $scope.mineForAspects = function() {
+        //     var url = getUrl();
+        //     console.debug("url: " + url);
+        //
+        //     $http.get(url)
+        //         .then(function(response) {
+        //             $scope.product = response.data;
+        //         });
+        //
+        //     $http.get(url)
+        //         .then(function(response) {
+        //             $scope.product = response.data;
+        //         });
+        // };
+
+        function putUrl() {
+            var url = 'http://localhost:8080/amvRestServices/service/loan/updateAspectMine';
+            return url;
+        }
 
         function getUrl() {
             var url = 'http://localhost:8080/amvRestServices/service/loan/-1?repayAmount=500.00&repayDate=2017-04-12';
             return url;
         }
+
+        // function getUrl() {
+        //     var url = 'http://localhost:8080/amvRestServices/service/loan/-1?repayAmount=500.00&repayDate=2017-04-12';
+        //     return url;
+        // }
 
         // function getUrl() {
         //     var url = 'http://localhost:9191/amv/mine?clusteringAlgorithm=' + getClusteringAlgorithm();
