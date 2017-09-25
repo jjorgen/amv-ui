@@ -59,40 +59,21 @@
 
         <div class="tab-content">
             <div id="sectionInputParameters" style="display:inline" class="tab-pane fade in active">
-                <label>Benchmark software to use when mining for aspects:</label>
-                <p>The JHot Draw version 4.12b source code will be mined for aspects. This source code is seeded with code clones to allow for mining of all categories of cross cutting concerns that are under consideration for this study.</p>
+                <label>Benchmark software used when mining for aspects:</label>
+                <p>The JHot Draw version 4.12b</p>
 
                 <!-- Start test -->
                 <div class="form-group">
                     <div class="row ">
-                        product.name : {{product.status}}
-                    </div>
-                    <div class="row ">
-                        product.qty : {{product.status}}
+                        Status : {{aspectMiningResult.status}}
                     </div>
                 </div>
                 <!-- End test -->
 
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-xs-12">
-                            <div class="radio">
-                                <label>
-                                    <input type = "radio" name="optionsRadios" id="tomcat" value="option1" checked/>
-                                    Tomcat Version 3.2
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="radio">
-                                <label>
-                                    <input type = "radio" name="optionsRadios" id="jHotDraw" value="option2" />
-                                    JHot Draw 4.12b
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <label>Software that will be mined</label>
+
+                <label>Clone Detection Algorithm that will be used:</label>
+                <p>JHot Draw version 4.12b</p>
 
                 <label>Clustering algorithm that will be used:</label>
                 <div class="form-group">
