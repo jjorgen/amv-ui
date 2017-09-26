@@ -36,6 +36,8 @@ var myApp = angular
                         $scope.aspectMiningResult = response.data;
                     }
                 );
+
+            showMineResults();
         };
 
         function putUrl() {

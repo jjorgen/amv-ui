@@ -22,7 +22,7 @@
     <![endif]-->
 
     <script>
-        function mineForAspects() {
+        function showMineResults() {
             var sectionInputParameters = document.getElementById('sectionInputParameters')
             sectionInputParameters.style.display = 'none';
 
@@ -30,11 +30,12 @@
             sectionAspectMiningResults.style.display = 'inline';
         }
         function showMineParameters() {
+            alert('test');
             var sectionInputParameters = document.getElementById('sectionInputParameters')
             sectionInputParameters.style.display = 'inline';
 
             var sectionAspectMiningResults = document.getElementById('sectionAspectMiningResults');
-            sectionAspectMiningResults.style.display = 'none';
+            sectionAspectMiningResults.style.display = 'inline';
         }
     </script>
     <title>Aspect Mining Visualization Tool</title>
@@ -57,7 +58,6 @@
             &nbsp;
         </div>
 
-        <div class="tab-content">
             <div id="sectionInputParameters" style="display:inline" class="tab-pane fade in active">
                 <label>Benchmark software used when mining for aspects:</label>
                 <p>The JHot Draw version 4.12b</p>
@@ -274,14 +274,13 @@
                     </div>
                 </div>
             </div>
-            <div id="sectionAspectMiningResults" class="tab-pane fade in active" style="display:none">
-                <h1>TB</h1>
-            </div>
-            <div class="form-group">
-                <!--<button class="btn btn-default" id="mineForAspectsBtnId" type="button" onClick="mineForAspects();">Mine For Aspects</button>&nbsp;-->
-                <button class="btn btn-default" id="mineForAspectsBtnId" type="button" ng-click="mineForAspects()">Mine For Aspects</button>&nbsp;
-                <button class="btn btn-default" id="mineParametersBtnId" type="button" onClick="showMineParameters();">Aspect mining input parameters</button>
-            </div>
+        <div id="sectionAspectMiningResults" class="tab-pane fade in active" style="display:none">
+            <h1>TB</h1>
+        </div>
+        <div class="form-group">
+            <!--<button class="btn btn-default" id="mineForAspectsBtnId" type="button" onClick="mineForAspects();">Mine For Aspects</button>&nbsp;-->
+            <button class="btn btn-default" id="mineForAspectsBtnId" type="button" ng-click="mineForAspects()">Mine For Aspects</button>&nbsp;
+            <button class="btn btn-default" id="mineParametersBtnId" type="button" onClick="showMineParameters();">Aspect mining input parameters</button>
         </div>
     </div>
 </form>
