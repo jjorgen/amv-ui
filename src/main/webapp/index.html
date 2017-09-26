@@ -35,7 +35,7 @@
             sectionInputParameters.style.display = 'inline';
 
             var sectionAspectMiningResults = document.getElementById('sectionAspectMiningResults');
-            sectionAspectMiningResults.style.display = 'inline';
+            sectionAspectMiningResults.style.display = 'none';
         }
     </script>
     <title>Aspect Mining Visualization Tool</title>
@@ -49,8 +49,8 @@
 
         <div>
             <ul class="nav nav-tabs">
-                <li class="inactive"><a data-toggle="tab"><strong>Aspect Mining Input Parameters</strong></a></li>
-                <li><a data-toggle="tab"><strong>Aspect Mining Results</strong></a></li>
+                <li class="inactive" ng-click="showMineParameters()"><a data-toggle="tab"><strong>Aspect Mining Input Parameters</strong></a></li>
+                <li ng-click="showMineResults()"><a data-toggle="tab"><strong>Aspect Mining Results</strong></a></li>
             </ul>
         </div>
 
@@ -279,8 +279,8 @@
         </div>
         <div class="form-group">
             <!--<button class="btn btn-default" id="mineForAspectsBtnId" type="button" onClick="mineForAspects();">Mine For Aspects</button>&nbsp;-->
-            <button class="btn btn-default" id="mineForAspectsBtnId" type="button" ng-click="mineForAspects()">Mine For Aspects</button>&nbsp;
-            <button class="btn btn-default" id="mineParametersBtnId" type="button" onClick="showMineParameters();">Aspect mining input parameters</button>
+            <button class="btn btn-default" id="mineForAspectsBtnId" type="button" ng-click="mineForAspects(); showMineResults()">Mine For Aspects</button>&nbsp;
+            <button class="btn btn-default" id="mineParametersBtnId" type="button" ng-click="showMineParameters()">Aspect mining input parameters</button>
         </div>
     </div>
 </form>

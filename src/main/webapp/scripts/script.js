@@ -37,7 +37,22 @@ var myApp = angular
                     }
                 );
 
-            showMineResults();
+        };
+
+        $scope.showMineResults = function() {
+            var sectionInputParameters = document.getElementById('sectionInputParameters')
+            sectionInputParameters.style.display = 'none';
+
+            var sectionAspectMiningResults = document.getElementById('sectionAspectMiningResults');
+            sectionAspectMiningResults.style.display = 'inline';
+        };
+
+        $scope.showMineParameters = function() {
+            var sectionInputParameters = document.getElementById('sectionInputParameters')
+            sectionInputParameters.style.display = 'inline';
+
+            var sectionAspectMiningResults = document.getElementById('sectionAspectMiningResults');
+            sectionAspectMiningResults.style.display = 'none';
         };
 
         function putUrl() {
