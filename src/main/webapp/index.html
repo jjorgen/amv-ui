@@ -38,6 +38,33 @@
             sectionAspectMiningResults.style.display = 'none';
         }
     </script>
+
+    <style>
+        table, td, th {
+            border: 1px solid black;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            width: 100%;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;        }
+
+        #paragraph_section_heading {
+            padding-bottom: 50px;
+            /*line-height: 1.8;*/
+        }
+    </style>
+
     <title>Aspect Mining Visualization Tool</title>
 </head>
 <body ng-app="amvModule">
@@ -275,8 +302,56 @@
                 </div>
             </div>
         <div id="sectionAspectMiningResults" class="tab-pane fade in active" style="display:none">
-            <h1>TB</h1>
+            <!--<div id="sectionAspectMiningResultsStatus" style="display:inline" class="tab-pane fade in active">-->
+            <!--</div>-->
+            <div id="sectionAspectMiningResultsSummary" style="display:inline" class="tab-pane fade in active">
+                <label>Aspect Mining Result: <span style="font-weight: bold;">{{aspectMiningResult.status}}</span></label>
+            </div>
+            <div id="sectionAspectMiningResultsSummaryTable" style="display:inline" class="tab-pane fade in active">
+                <table>
+                    <tr>
+                        <th>Cross Cutting Concern Category</th>
+                        <th>Clustering</th>
+                        <th>Cloning</th>
+                        <th>Event Traces</th>
+                    </tr>
+                    <tr ng-repeat="data in aspectMiningResult.aspectMiningSummary.aspectMineByCategory" >
+                        <td>{{data.crossCuttingConcernCategory}}</td>
+                        <td>{{data.clusteringCount}}</td>
+                        <td>{{data.cloningCount}}</td>
+                        <td>{{data.eventTracesCount}}</td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>Ordered Method Call</td>-->
+                        <!--<td>100</td>-->
+                        <!--<td>200</td>-->
+                        <!--<td>300</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Code Clone</td>-->
+                        <!--<td>400</td>-->
+                        <!--<td>500</td>-->
+                        <!--<td>600</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Unique Class Fan In</td>-->
+                        <!--<td>700</td>-->
+                        <!--<td>800</td>-->
+                        <!--<td>900</td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td>Total</td>
+                        <td>{{aspectMiningResult.aspectMiningSummary.clusteringTotalCount}}</td>
+                        <td>{{aspectMiningResult.aspectMiningSummary.cloningTotalCount}}</td>
+                        <td>{{aspectMiningResult.aspectMiningSummary.eventTracesTotalCount}}</td>
+                    </tr>
+                </table>
+            </div>
+            $("#test").hide(100, function() {
+            $(this).html("......").show(100);
+            });
         </div>
+        <p/>
         <div class="form-group">
             <!--<button class="btn btn-default" id="mineForAspectsBtnId" type="button" onClick="mineForAspects();">Mine For Aspects</button>&nbsp;-->
             <button class="btn btn-default" id="mineForAspectsBtnId" type="button" ng-click="mineForAspects(); showMineResults()">Mine For Aspects</button>&nbsp;
